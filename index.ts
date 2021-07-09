@@ -57,11 +57,11 @@ const main = async () => {
         // Invoke notification
         await page.evaluate(() => {
             const audio = new Audio('https://otologic.jp/sounds/se/pre/News-Alert03-1.mp3');
+            audio.loop = true;
             audio.play();
         });
     } else {
         await browser.close();
-        return;
     }
 };
 
