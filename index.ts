@@ -1,4 +1,5 @@
 import puppeteer from 'puppeteer';
+import schedule from 'node-schedule';
 import dotnev from 'dotenv';
 dotnev.config();
 
@@ -64,4 +65,6 @@ const main = async () => {
     }
 };
 
-main();
+schedule.scheduleJob('*/15 * * * *', () => {
+    main();
+});
