@@ -52,19 +52,20 @@ const main = async () => {
         const availableDays = availableDayStrs.map(s => s.split('\n')[0]);
         return availableDays;
     });
-    console.log(availableDays);
-    if (availableDays.length > 0) {
-        // Invoke notification
-        await page.evaluate(() => {
-            const audio = new Audio('https://otologic.jp/sounds/se/pre/News-Alert03-1.mp3');
-            audio.loop = true;
-            audio.play();
-        });
-    } else {
+    if (availableDays.length === 0) {
         await browser.close();
+        return;
     }
+    console.log(availableDays);
+    // Invoke notification
+    await page.evaluate(() => {
+        const audio = new Audio('https://otologic.jp/sounds/se/pre/News-Alert03-1.mp3');
+        audio.loop = true;
+        audio.play();
+    });
 };
 
+main();
 schedule.scheduleJob('*/15 * * * *', () => {
     main();
 });
