@@ -43,20 +43,20 @@ const main = async () => {
         await browser.close();
         return;
     }
-    await page.waitForTimeout(2000);
-    const availableDays = await page.evaluate(() => {
-        const dayCells = document.querySelectorAll<HTMLTableDataCellElement & {
-            outerText: string; // なんでこれないんすかねぇ………
-        }>('div.fc-dayGridMonth-view td.fc-day-top');
-        const availableDayStrs = Array.from(dayCells).map(d => d.outerText).filter(d => d.includes('△') || d.includes('〇'));
-        const availableDays = availableDayStrs.map(s => s.split('\n')[0]);
-        return availableDays;
-    });
-    if (availableDays.length === 0) {
-        await browser.close();
-        return;
-    }
-    console.log(availableDays);
+    // await page.waitForTimeout(2000);
+    // const availableDays = await page.evaluate(() => {
+    //     const dayCells = document.querySelectorAll<HTMLTableDataCellElement & {
+    //         outerText: string; // なんでこれないんすかねぇ………
+    //     }>('div.fc-dayGridMonth-view td.fc-day-top');
+    //     const availableDayStrs = Array.from(dayCells).map(d => d.outerText).filter(d => d.includes('△') || d.includes('〇'));
+    //     const availableDays = availableDayStrs.map(s => s.split('\n')[0]);
+    //     return availableDays;
+    // });
+    // if (availableDays.length === 0) {
+    //     await browser.close();
+    //     return;
+    // }
+
     // Invoke notification
     await page.evaluate(() => {
         const audio = new Audio('https://otologic.jp/sounds/se/pre/News-Alert03-1.mp3');
